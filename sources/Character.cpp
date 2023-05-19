@@ -44,7 +44,7 @@ namespace ariel
     {
         if (isAlive())
         {
-            cout << "(" << _name << ") " << _hitPoints << " (" << _location.getX() << "," << _location.getY() << ")" << endl;
+            cout << "(" << _name << ") " << _hitPoints << " (x:" << _location.getX() << "," << _location.getY() << ")" << endl;
             return "(" + _name + ") " + to_string(_hitPoints) + " (" + to_string(_location.getX()) + "," + to_string(_location.getY()) + ") \n";
         }
 

@@ -14,7 +14,6 @@ namespace ariel
     class Team
     {
     protected:
-        Character *_leader;
         Character *_teamArray[MAX_TEAM_SIZE];
         Character *_cowboysArray[MAX_TEAM_SIZE];
         Character *_ninjasArray[MAX_TEAM_SIZE];
@@ -25,6 +24,7 @@ namespace ariel
         Character* findNewVictim(Team *enemyTeam);
 
     public:
+        Character *_leader;
         // constructors:
         Team(Character *leader);
          ~Team();

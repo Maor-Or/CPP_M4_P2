@@ -22,15 +22,14 @@ namespace ariel
     void Point::print() { std::cout << "(" << _x << "," << _y << ")"; }
     Point Point::moveTowards(Point origin, Point destination, double distance)
     {
-        if (distance<0)
+        if (distance < 0)
         {
-        throw std::invalid_argument("Invalid argument: value must be non-negative");
+            throw std::invalid_argument("Invalid argument: value must be non-negative");
         }
-        
-        
+
         double currDistance = origin.distance(destination);
-        
-        if (distance==0||currDistance == 0)
+
+        if (distance == 0 || currDistance == 0)
         {
             return origin;
         }
@@ -50,10 +49,19 @@ namespace ariel
 
         // Point p_res(new_x_location, new_y_location);
         // return p_res;
-        return{new_x_location,new_y_location};
+        return {new_x_location, new_y_location};
     }
 
     // my added functions:
     double Point::getX() const { return _x; }
     double Point::getY() const { return _y; }
+    Point &Point::operator=(Point &other)
+    {
+        _x = other._x;
+        _y = other._y;
+        return *this;
+    }
+    void Point::setX(double newx){_x =newx;}
+    void Point::setY(double newy){_y=newy;}
+
 };

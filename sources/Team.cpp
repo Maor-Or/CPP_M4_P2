@@ -17,10 +17,10 @@ namespace ariel
     Team::~Team()
     {
         // cout << "in Team's dtor"<<endl;
-        // for (int i = 0; i < _currTeamSize; i++)
-        // {
-        //     delete _teamArray[i];
-        // }
+        for (int i = 0; i < _currTeamSize; i++)
+        {
+            delete _teamArray[i];
+        }
     }
 
     // functions to implement:
@@ -210,6 +210,9 @@ namespace ariel
         if (minDistCharacter != nullptr)
         {
             _leader = minDistCharacter;
+            // cout << "the new leader is: " << _leader->getName()<<
+            // to_string(_leader->getLocation().getX())<<" , "<<
+            // to_string(_leader->getLocation().getX()) <<endl ;
         }
     }
 };

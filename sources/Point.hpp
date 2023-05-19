@@ -23,6 +23,9 @@ namespace ariel
         //my added functions:
         double getX() const;
         double getY() const;
+        Point& operator=(Point& other);
+        void setX(double newx);
+        void setY(double newy);
 
     };
     

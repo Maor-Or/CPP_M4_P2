@@ -20,8 +20,12 @@ namespace ariel
 
     // functions to implement:
     void Ninja::move(const Character *enemy)
-    {
-        _location = Point::moveTowards(_location, enemy->getLocation(), _speed);
+    {//TODO: fix this, copy func on point isnt working 
+        double newx = Point::moveTowards(_location, enemy->getLocation(), _speed).getX();
+        double newy = Point::moveTowards(_location, enemy->getLocation(), _speed).getY();
+       cout<< to_string(newx) <<to_string(newy)<<endl;
+       _location.setX(newx);
+       _location.setY(newy);
     }
 
     void Ninja::slash(Character *enemy) const
@@ -31,7 +35,7 @@ namespace ariel
         {
             throw std::runtime_error("can't shoot a dead enemy | dead cowboy can't shoot | can't shoot self");
         }
-        
+
         double distance = _location.distance(enemy->getLocation());
 
         if (isAlive() && distance < 1)
