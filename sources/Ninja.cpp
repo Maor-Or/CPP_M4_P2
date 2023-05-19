@@ -26,6 +26,12 @@ namespace ariel
 
     void Ninja::slash(Character *enemy) const
     {
+        //can't slash a dead enemy (why not?). can't slash if dead. can't slash self
+        if (!(enemy->isAlive())||enemy == this||!(isAlive()))
+        {
+            throw std::runtime_error("can't shoot a dead enemy | dead cowboy can't shoot | can't shoot self");
+        }
+        
         double distance = _location.distance(enemy->getLocation());
 
         if (isAlive() && distance < 1)
@@ -54,11 +60,11 @@ namespace ariel
         // printf("in ninja attack:\n");
         if (distance(enemy)<1)
         {
-            move(enemy);
+            slash(enemy);
         }
         else
         {
-            slash(enemy);
+            move(enemy);
         }
     }
 

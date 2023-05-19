@@ -1,5 +1,8 @@
 
 #include "Team2.hpp"
+#include<iostream>
+
+using namespace std;
 
 namespace ariel
 {
@@ -10,10 +13,16 @@ namespace ariel
 
     Team2::~Team2()
     {
+        // printf("in team2 dtor\n");
     }
 
     void Team2::attack(Team *enemyTeam)
     {
+
+        if (enemyTeam == nullptr)
+        {
+            throw std::invalid_argument("victim can't be nullptr");
+        }
 
         // if the attacking team is all dead, then the attack is over
         if (stillAlive()) // > 0

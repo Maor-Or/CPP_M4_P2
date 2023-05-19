@@ -27,7 +27,7 @@ namespace ariel
     public:
         // constructors:
         Team(Character *leader);
-        ~Team();
+         ~Team();
 
         // functions to implement:
         void add(Character *newTeamMember);

@@ -8,12 +8,15 @@ namespace ariel
 {
     // Ctors & Dtors:
     Character::Character(string name, Point characterLoction)
-        : _name(name), _location(characterLoction), _hitPoints(0)
+        : _name(name), _location(characterLoction), _hitPoints(0) ,_isInTeam(false)
     {
     }
 
     Character::~Character()
     {
+        // cout << "in " << getName() << "'s Dtor ";
+        // _location.print();
+        // printf("\n");
     }
 
     // functions to implement:
@@ -24,6 +27,11 @@ namespace ariel
     }
     void Character::hit(int dmg)
     {
+        if (dmg<0)
+        {
+            throw std::invalid_argument("can't hit negative damage");
+        }
+        
         _hitPoints -= dmg;
         if (_hitPoints < 0)
         {
@@ -47,6 +55,8 @@ namespace ariel
     }
 
     // my added functions:
-    void Character::attackTarget(Character *enemy) {printf("Character attack is called...");}
+    void Character::attackTarget(Character *enemy) { printf("Character attack is called..."); }
+    void Character::setIsInTeam() { _isInTeam = true; }
+    bool Character::getIsInTeam() const { return _isInTeam; }
 
 }; // namespace ariel

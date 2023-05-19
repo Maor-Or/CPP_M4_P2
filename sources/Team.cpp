@@ -1,7 +1,7 @@
 #include "Team.hpp"
 #include <limits>
-#include<string>
-#include<iostream>
+#include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -16,19 +16,27 @@ namespace ariel
 
     Team::~Team()
     {
-        for (int i = 0; i < _currTeamSize; i++)
-        {
-            delete _teamArray[i];
-        }
+        // cout << "in Team's dtor"<<endl;
+        // for (int i = 0; i < _currTeamSize; i++)
+        // {
+        //     delete _teamArray[i];
+        // }
     }
 
     // functions to implement:
     void Team::add(Character *newTeamMember)
     {
-        if (_currTeamSize < MAX_TEAM_SIZE)
+        if (_currTeamSize >= MAX_TEAM_SIZE)
         {
-            _teamArray[_currTeamSize++] = newTeamMember;
+            throw std::runtime_error("team is already full!");
         }
+        if (newTeamMember->getIsInTeam() == true)
+        {
+            throw std::runtime_error("new member is already in a team!");
+        }
+
+        _teamArray[_currTeamSize++] = newTeamMember;
+        newTeamMember->setIsInTeam();
 
         // if the new teamate is a cowboy then add it to the cowboys array:
         if (Cowboy *cowboyPtr = dynamic_cast<Cowboy *>(newTeamMember))
@@ -44,8 +52,19 @@ namespace ariel
     }
     void Team::attack(Team *enemyTeam)
     {
+        if (enemyTeam == nullptr)
+        {
+            throw std::invalid_argument("victim can't be nullptr");
+        }
+        // if the attacked team is already dead then throw an error:
+        if (enemyTeam->stillAlive() == 0)
+        {
+            throw std::runtime_error("attacked team is already dead");
+            return;
+        }
+
         // if the attacking team is all dead, then the attack is over
-        if (stillAlive()==0) // = 0
+        if (stillAlive() == 0)
         {
             // printf("attacking team is all dead\n");
             return;
