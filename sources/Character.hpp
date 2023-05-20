@@ -30,5 +30,6 @@ namespace ariel
         virtual void attackTarget(Character *enemy) = 0;
         void setIsInTeam();
         bool getIsInTeam() const;
+        int getHP() const;
     };
 } // namespace ariel

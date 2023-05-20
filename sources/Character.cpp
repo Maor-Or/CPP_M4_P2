@@ -58,5 +58,6 @@ namespace ariel
     // my added functions:
     void Character::setIsInTeam() { _isInTeam = true; }
     bool Character::getIsInTeam() const { return _isInTeam; }
+    int Character::getHP() const { return _hitPoints; }
 
 }; // namespace ariel

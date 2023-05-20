@@ -15,14 +15,24 @@ namespace ariel
         ~SmartTeam();
 
         // functions to implement:
-        Ninja *scanForNinjaThreat(Character *attacker, Team *enemyTeam);
-        Cowboy *closestCowboy( Character *attacker, Team *enemyTeam); 
-
         void attack(Team *enemyTeam);
+        
+        //my added functions:
         int analizeEnemyTeam(Team *enemyTeam);
-        void RUSH(Character *attacker,Team *enemyTeam);
-        void CAMP(Character *attacker,Team *enemyTeam);
-        void BRAWL(Character *attacker,Team *enemyTeam);
+
+        Character *findLowestHPEnemy(Character *attacker, Team *enemyTeam);
+        Character *findClosestEnemy(Character *attacker, Team *enemyTeam);
+
+        Ninja *scanForNinjaThreat(Character *attacker, Team *enemyTeam);
+        Ninja *findClosestNinja(Character *attacker, Team *enemyTeam);
+        
+        Cowboy *closestCowboy(Character *attacker, Team *enemyTeam);
+        Cowboy *findFurthestCowboy(Character *attacker, Team *enemyTeam);
+        Cowboy *findWeakestCowboy(Character *attacker, Team *enemyTeam);
+
+        void rush(Character *attacker, Team *enemyTeam);  
+        void camp(Character *attacker, Team *enemyTeam);
+        void brawl(Character *attacker, Team *enemyTeam);
     };
 
 } // namespace ariel
