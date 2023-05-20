@@ -10,6 +10,9 @@ namespace ariel
     Character::Character(string name, Point characterLoction)
         : _name(name), _location(characterLoction), _hitPoints(0) ,_isInTeam(false)
     {
+        //cout <<getName() <<"was created, their location: " << to_string(_location.getX()) <<", "<<to_string(_location.getY())<<endl;
+        cout << "was created:";
+        print();
     }
 
     Character::~Character()

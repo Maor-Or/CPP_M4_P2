@@ -13,6 +13,7 @@ namespace ariel
 
     // Ctors & Dtors:
         Point(double x, double y);
+        Point(const Point& other);
         ~Point();
 
         //functions to implement:
@@ -23,7 +24,7 @@ namespace ariel
         //my added functions:
         double getX() const;
         double getY() const;
-        Point& operator=(Point& other);
+        Point& operator=(const Point& other);
         void setX(double newx);
         void setY(double newy);
 

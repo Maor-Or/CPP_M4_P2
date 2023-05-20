@@ -20,10 +20,10 @@ namespace ariel
         int _currTeamSize, _currCowboysSize, _currNinjasSize;
 
         // my added functions:
-        void updateLeader();
-        Character* findNewVictim(Team *enemyTeam);
 
     public:
+        void updateLeader();
+        Character* findNewVictim(Team *enemyTeam);
         Character *_leader;
         // constructors:
         Team(Character *leader);

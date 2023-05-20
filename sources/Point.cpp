@@ -1,6 +1,8 @@
 #include <iostream>
 #include "Point.hpp"
 #include <math.h>
+#include<string>
+using namespace std;
 
 namespace ariel
 {
@@ -8,6 +10,10 @@ namespace ariel
     // Ctors & Dtors:
     Point::Point(double x, double y) : _x(x), _y(y)
     {
+    }
+    Point::Point(const Point &other):_x(other.getX()),_y(other.getY())
+    {
+       // cout << "point's location: (x: "<< to_string(_x) <<", y: "<<to_string(_y)<<endl;
     }
 
     Point::~Point()
@@ -55,7 +61,7 @@ namespace ariel
     // my added functions:
     double Point::getX() const { return _x; }
     double Point::getY() const { return _y; }
-    Point &Point::operator=(Point &other)
+    Point &Point::operator=(const Point &other)
     {
         _x = other._x;
         _y = other._y;

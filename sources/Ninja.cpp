@@ -21,12 +21,17 @@ namespace ariel
     // functions to implement:
     void Ninja::move(const Character *enemy)
     {//TODO: fix this, copy func on point isnt working 
-        double newx = Point::moveTowards(_location, enemy->getLocation(), _speed).getX();
-        double newy = Point::moveTowards(_location, enemy->getLocation(), _speed).getY();
-       cout<< to_string(newx) <<to_string(newy)<<endl;
-       _location.setX(newx);
-       _location.setY(newy);
-    }
+    //     double newx = Point::moveTowards(_location, enemy->getLocation(), _speed).getX();
+    //     double newy = Point::moveTowards(_location, enemy->getLocation(), _speed).getY();
+    //    cout<< to_string(newx) <<to_string(newy)<<endl;
+    //    _location.setX(newx);
+    //    _location.setY(newy);
+    cout << "about to move: ";
+        print();
+     _location = Point::moveTowards(_location, enemy->getLocation(), _speed);
+    cout << "new location: ";
+        print();
+     }
 
     void Ninja::slash(Character *enemy) const
     {

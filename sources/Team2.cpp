@@ -1,6 +1,6 @@
 
 #include "Team2.hpp"
-#include<iostream>
+#include <iostream>
 
 using namespace std;
 
@@ -23,25 +23,38 @@ namespace ariel
         {
             throw std::invalid_argument("victim can't be nullptr");
         }
-
-        // if the attacking team is all dead, then the attack is over
-        if (stillAlive()) // > 0
+        // if the attacked team is already dead then throw an error:
+        if (enemyTeam->stillAlive() == 0)
         {
+            throw std::runtime_error("attacked team is already dead");
             return;
         }
 
+        // if the attacking team is all dead, then the attack is over
+        if (stillAlive() == 0)
+        {
+            printf("attacking team is all dead\n");
+            return;
+        }
         // if the leader is dead then first pick a new leader:
         if (!(_leader->isAlive()))
         {
+            printf("attacking team's leader is dead, finding new leader...\n");
             updateLeader();
+            printf("new leader: ");
+            _leader->print();
         }
 
         // find the enemy team's victim (closest to the attacking team's leader):
         Character *victim = findNewVictim(enemyTeam);
+        std::cout << "new victim found: " << victim->getName() << std::endl;
+        printf("new victim found: ");
+        victim->print();
 
         // incase the entire enemy team is dead, a nullptr will be returned, and the attack is over:
         if (victim == nullptr)
         {
+            printf("attacked team is all dead\n");
             return;
         }
 
