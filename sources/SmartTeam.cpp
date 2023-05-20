@@ -68,7 +68,7 @@ namespace ariel
             // if the cowboy is dead, can't attack:
             if (_cowboysArray[i]->isAlive() == 0)
             {
-                break;
+                continue;
             }
 
             // checking the enemy team's location and status:
@@ -82,7 +82,7 @@ namespace ariel
             */
             case 0:
                 camp(_cowboysArray[i], enemyTeam);
-                break;
+                continue;
 
             /*
             if there are no cowboys on the attacking team and there are cowboys on the attacked team,
@@ -90,7 +90,7 @@ namespace ariel
             */
             case 1:
                 rush(_cowboysArray[i], enemyTeam);
-                break;
+                continue;
 
             /*
             if none of the above happens, cowboys should kill the other cowboys
@@ -98,10 +98,10 @@ namespace ariel
             */
             case 2:
                 brawl(_cowboysArray[i], enemyTeam);
-                break;
+                continue;
 
             default:
-                break;
+                continue;
             }
         }
 
@@ -119,7 +119,7 @@ namespace ariel
             // if the ninja is dead, can't attack:
             if (_ninjasArray[i]->isAlive() == 0)
             {
-                break;
+                continue;
             }
 
             // checking the enemy team's location and status:
@@ -129,18 +129,18 @@ namespace ariel
             {
             case 0:
                 camp(_ninjasArray[i], enemyTeam);
-                break;
+                continue;
 
             case 1:
                 rush(_ninjasArray[i], enemyTeam);
-                break;
+                continue;
 
             case 2:
                 brawl(_ninjasArray[i], enemyTeam);
-                break;
+                continue;
 
             default:
-                break;
+                continue;
             }
         }
     }
@@ -189,6 +189,8 @@ namespace ariel
     */
     void SmartTeam::rush(Character *attacker, Team *enemyTeam)
     {
+        attacker->print(); cout << " is rushing" << endl;
+
         Ninja *threat = scanForNinjaThreat(attacker, enemyTeam);
         if (threat != nullptr)
         {
@@ -206,6 +208,8 @@ namespace ariel
     */
     void SmartTeam::camp(Character *attacker, Team *enemyTeam)
     {
+        cout << attacker->print() << " is camping" << endl;
+
         // ninjas should go for their cowboys and protect them:
         if (Ninja *ninjaPtr = dynamic_cast<Ninja *>(attacker))
         {
@@ -249,6 +253,8 @@ namespace ariel
     */
     void SmartTeam::brawl(Character *attacker, Team *enemyTeam)
     {
+        cout << attacker->print() << " is brawling" << endl;
+
         // cowboys should shoot the cowboys and then the closest enemy ninjas:
         if (Cowboy *cowboyPtr = dynamic_cast<Cowboy *>(attacker))
         {
@@ -311,7 +317,6 @@ namespace ariel
 
     Ninja *SmartTeam::findClosestNinja(Character *attacker, Team *enemyTeam)
     {
-
         double minDistance = numeric_limits<double>::max();
         Character *currEnemy = nullptr, *minDistEnemy = nullptr;
         int currEnemyTeamSize = enemyTeam->getCurrTeamSize();
@@ -332,11 +337,12 @@ namespace ariel
                 }
             }
         }
-        return currEnemy != nullptr ? dynamic_cast<Ninja *>(currEnemy) : nullptr;
+        return minDistEnemy != nullptr ? dynamic_cast<Ninja *>(minDistEnemy) : nullptr;
     }
 
     Cowboy *SmartTeam::findFurthestCowboy(Character *attacker, Team *enemyTeam)
     {
+
         double maxDistance = 0;
         Character *currEnemy = nullptr, *maxDistEnemy = nullptr;
         int currEnemyTeamSize = enemyTeam->getCurrTeamSize();
@@ -357,11 +363,12 @@ namespace ariel
                 }
             }
         }
-        return currEnemy != nullptr ? dynamic_cast<Cowboy *>(currEnemy) : nullptr;
+        return maxDistEnemy != nullptr ? dynamic_cast<Cowboy *>(maxDistEnemy) : nullptr;
     }
 
     Cowboy *SmartTeam::closestCowboy(Character *attacker, Team *enemyTeam)
     {
+
         double minDistance = numeric_limits<double>::max();
         Character *currEnemy = nullptr, *minDistEnemy = nullptr;
         int currEnemyTeamSize = enemyTeam->getCurrTeamSize();
@@ -382,7 +389,8 @@ namespace ariel
                 }
             }
         }
-        return currEnemy != nullptr ? dynamic_cast<Cowboy *>(currEnemy) : nullptr;
+
+        return minDistEnemy != nullptr ? dynamic_cast<Cowboy *>(minDistEnemy) : nullptr;
     }
 
     Character *SmartTeam::findLowestHPEnemy(Character *attacker, Team *enemyTeam)
@@ -405,7 +413,7 @@ namespace ariel
                 }
             }
         }
-        return currEnemy != nullptr ? (currEnemy) : nullptr;
+        return minHPEnemy != nullptr ? (minHPEnemy) : nullptr;
     }
 
     Cowboy *SmartTeam::findWeakestCowboy(Character *attacker, Team *enemyTeam)
@@ -431,7 +439,7 @@ namespace ariel
                 }
             }
         }
-        return currEnemy != nullptr ? dynamic_cast<Cowboy *>(currEnemy) : nullptr;
+        return minHPEnemy != nullptr ? dynamic_cast<Cowboy *>(minHPEnemy) : nullptr;
     }
 
     Character *SmartTeam::findClosestEnemy(Character *attacker, Team *enemyTeam)
@@ -454,7 +462,7 @@ namespace ariel
                 }
             }
         }
-        return currEnemy != nullptr ? (currEnemy) : nullptr;
+        return minDistEnemy != nullptr ? (minDistEnemy) : nullptr;
     }
 
 } // namespace ariel
