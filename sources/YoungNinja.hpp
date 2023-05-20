@@ -8,12 +8,10 @@ namespace ariel
     class YoungNinja : public Ninja
     {
     private:
-        /* data */
     public:
+        // Ctors & Dtors:
         YoungNinja(std::string name, Point characterLoction);
         ~YoungNinja();
     };
-    
-   
-    
+
 } // namespace ariel

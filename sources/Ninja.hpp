@@ -13,7 +13,7 @@ namespace ariel
 
     public:
 
-        //constructors:
+        // Ctors & Dtors:
         Ninja(std::string name, Point characterLoction);
         ~Ninja();
     

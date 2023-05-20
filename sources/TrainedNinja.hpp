@@ -7,11 +7,10 @@ namespace ariel
     class TrainedNinja : public Ninja
     {
     private:
-        /* data */
     public:
+        // Ctors & Dtors:
         TrainedNinja(std::string name, Point characterLoction);
         ~TrainedNinja();
     };
-   
-    
+
 } // namespace ariel

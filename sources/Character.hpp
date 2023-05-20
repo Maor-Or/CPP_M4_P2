@@ -6,14 +6,17 @@ namespace ariel
     class Character
     {
     protected:
+
         Point _location;
         int _hitPoints;
         std::string _name;
         bool _isInTeam;
 
     public:
+       
+           // Ctors & Dtors:
         Character(std::string name, Point characterLoction);
-        ~Character();
+       virtual ~Character();
 
         // functions to implement:
         bool isAlive() const;
@@ -24,7 +27,7 @@ namespace ariel
         virtual std::string print() const;
 
         // my added functions:
-        virtual void attackTarget(Character *enemy);
+        virtual void attackTarget(Character *enemy) = 0;
         void setIsInTeam();
         bool getIsInTeam() const;
     };

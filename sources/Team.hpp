@@ -17,23 +17,25 @@ namespace ariel
         Character *_teamArray[MAX_TEAM_SIZE];
         Character *_cowboysArray[MAX_TEAM_SIZE];
         Character *_ninjasArray[MAX_TEAM_SIZE];
+        Character *_leader;
         int _currTeamSize, _currCowboysSize, _currNinjasSize;
 
-        // my added functions:
+        // my added private functions:
+        void updateLeader();
+        Character *findNewVictim(Team *enemyTeam);
 
     public:
-        void updateLeader();
-        Character* findNewVictim(Team *enemyTeam);
-        Character *_leader;
-        // constructors:
+        // Ctors & Dtors:
         Team(Character *leader);
-         ~Team();
+        ~Team();
 
         // functions to implement:
         void add(Character *newTeamMember);
         virtual void attack(Team *enemyTeam);
         int stillAlive() const;
         void print() const;
+        int getCurrTeamSize() const;
+        Character *getCharacterAt(int index);
     };
 
 };

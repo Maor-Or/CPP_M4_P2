@@ -14,19 +14,17 @@ namespace ariel
         int _bulletAmount;
 
     public:
-    
-    //constructors:
+        // Ctors & Dtors:
         Cowboy(std::string name, Point characterLoction);
         ~Cowboy();
-    
-    //functions to implement:
-    void shoot(Character *enemy);
-    bool hasboolets() const;
-    void reload();
-    std::string print() const;
 
-    //my added functions:
-    void attackTarget(Character *enemy);
+        // functions to implement:
+        void shoot(Character *enemy);
+        bool hasboolets() const;
+        void reload();
+        std::string print() const;
 
-    };    
+        // my added functions:
+        void attackTarget(Character *enemy);
+    };
 } // namespace ariel

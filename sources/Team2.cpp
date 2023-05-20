@@ -7,22 +7,24 @@ using namespace std;
 namespace ariel
 {
 
+    // Ctors & Dtors:
     Team2::Team2(Character *leader) : Team(leader)
     {
     }
 
     Team2::~Team2()
     {
-        // printf("in team2 dtor\n");
     }
 
+    // functions to implement:
     void Team2::attack(Team *enemyTeam)
     {
-
+        // can't attack a nullptr team:
         if (enemyTeam == nullptr)
         {
             throw std::invalid_argument("victim can't be nullptr");
         }
+
         // if the attacked team is already dead then throw an error:
         if (enemyTeam->stillAlive() == 0)
         {
@@ -33,28 +35,21 @@ namespace ariel
         // if the attacking team is all dead, then the attack is over
         if (stillAlive() == 0)
         {
-            printf("attacking team is all dead\n");
             return;
         }
+
         // if the leader is dead then first pick a new leader:
         if (!(_leader->isAlive()))
         {
-            printf("attacking team's leader is dead, finding new leader...\n");
             updateLeader();
-            printf("new leader: ");
-            _leader->print();
         }
 
         // find the enemy team's victim (closest to the attacking team's leader):
         Character *victim = findNewVictim(enemyTeam);
-        std::cout << "new victim found: " << victim->getName() << std::endl;
-        printf("new victim found: ");
-        victim->print();
 
         // incase the entire enemy team is dead, a nullptr will be returned, and the attack is over:
         if (victim == nullptr)
         {
-            printf("attacked team is all dead\n");
             return;
         }
 
@@ -65,7 +60,8 @@ namespace ariel
             if (!(victim->isAlive()))
             {
                 victim = findNewVictim(enemyTeam);
-                // incase the entire enemy team is dead, a nullptr will be returned, and the attack is over:
+                // incase the entire enemy team is dead,
+                // a nullptr will be returned, and the attack is over:
                 if (victim == nullptr)
                 {
                     return;

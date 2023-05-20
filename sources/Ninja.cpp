@@ -8,7 +8,7 @@ using namespace std;
 namespace ariel
 {
 
-    // constructors:
+    // Ctors & Dtors:
     Ninja::Ninja(std::string name, Point characterLoction)
         : Character(name, characterLoction), _speed(0)
     {
@@ -20,23 +20,14 @@ namespace ariel
 
     // functions to implement:
     void Ninja::move(const Character *enemy)
-    {//TODO: fix this, copy func on point isnt working 
-    //     double newx = Point::moveTowards(_location, enemy->getLocation(), _speed).getX();
-    //     double newy = Point::moveTowards(_location, enemy->getLocation(), _speed).getY();
-    //    cout<< to_string(newx) <<to_string(newy)<<endl;
-    //    _location.setX(newx);
-    //    _location.setY(newy);
-    cout << "about to move: ";
-        print();
-     _location = Point::moveTowards(_location, enemy->getLocation(), _speed);
-    cout << "new location: ";
-        print();
-     }
+    {
+        _location = Point::moveTowards(_location, enemy->getLocation(), _speed);
+    }
 
     void Ninja::slash(Character *enemy) const
     {
-        //can't slash a dead enemy (why not?). can't slash if dead. can't slash self
-        if (!(enemy->isAlive())||enemy == this||!(isAlive()))
+        // can't slash a dead enemy (why not?). can't slash self. can't slash if dead
+        if (!(enemy->isAlive()) || enemy == this || !(isAlive()))
         {
             throw std::runtime_error("can't shoot a dead enemy | dead cowboy can't shoot | can't shoot self");
         }
@@ -53,8 +44,8 @@ namespace ariel
     {
         if (isAlive())
         {
-            cout << "N (" << _name << ") " << _hitPoints << " (" << _location.getX() << "," << _location.getY() << ")" << endl;
-            return "N (" + _name + ") " + to_string(_hitPoints) + " (" + to_string(_location.getX()) + "," + to_string(_location.getY()) + ") \n";
+            cout << "N " << _name << " " << _hitPoints << " (" << _location.getX() << "," << _location.getY() << ")" << endl;
+            return "N " + _name + " " + to_string(_hitPoints) + " (" + to_string(_location.getX()) + "," + to_string(_location.getY()) + ") \n";
         }
 
         // else hitPoints = 0:
@@ -66,8 +57,7 @@ namespace ariel
     // my added functions:
     void Ninja::attackTarget(Character *enemy)
     {
-        // printf("in ninja attack:\n");
-        if (distance(enemy)<1)
+        if (distance(enemy) < 1)
         {
             slash(enemy);
         }

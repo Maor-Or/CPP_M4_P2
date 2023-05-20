@@ -8,10 +8,11 @@ namespace ariel
     {
     private:
     public:
+        // Ctors & Dtors:
         Team2(Character *leader);
         ~Team2();
 
-
+        // functions to implement:
         void attack(Team *enemyTeam);
     };
 

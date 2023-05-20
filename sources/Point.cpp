@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Point.hpp"
 #include <math.h>
-#include<string>
+#include <string>
 using namespace std;
 
 namespace ariel
@@ -11,9 +11,8 @@ namespace ariel
     Point::Point(double x, double y) : _x(x), _y(y)
     {
     }
-    Point::Point(const Point &other):_x(other.getX()),_y(other.getY())
+    Point::Point(const Point &other) : _x(other.getX()), _y(other.getY())
     {
-       // cout << "point's location: (x: "<< to_string(_x) <<", y: "<<to_string(_y)<<endl;
     }
 
     Point::~Point()
@@ -25,9 +24,10 @@ namespace ariel
     {
         return sqrt(pow((_x - other.getX()), 2) + pow((_y - other.getY()), 2));
     }
-    void Point::print() { std::cout << "(" << _x << "," << _y << ")"; }
+    void Point::print() { std::cout << "(" << _x << "," << _y << ")\n"; }
     Point Point::moveTowards(Point origin, Point destination, double distance)
     {
+        // negative distance is invalid:
         if (distance < 0)
         {
             throw std::invalid_argument("Invalid argument: value must be non-negative");
@@ -67,7 +67,7 @@ namespace ariel
         _y = other._y;
         return *this;
     }
-    void Point::setX(double newx){_x =newx;}
-    void Point::setY(double newy){_y=newy;}
+    void Point::setX(double newx) { _x = newx; }
+    void Point::setY(double newy) { _y = newy; }
 
 };

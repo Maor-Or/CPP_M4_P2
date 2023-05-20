@@ -16,7 +16,7 @@ namespace ariel
 
     Team::~Team()
     {
-        // cout << "in Team's dtor"<<endl;
+        // freeing the teamates from the heap allocation:
         for (int i = 0; i < _currTeamSize; i++)
         {
             delete _teamArray[i];
@@ -26,15 +26,12 @@ namespace ariel
     // functions to implement:
     void Team::add(Character *newTeamMember)
     {
-        if (_currTeamSize >= MAX_TEAM_SIZE)
+        if (_currTeamSize >= MAX_TEAM_SIZE || newTeamMember->getIsInTeam() == true)
         {
-            throw std::runtime_error("team is already full!");
-        }
-        if (newTeamMember->getIsInTeam() == true)
-        {
-            throw std::runtime_error("new member is already in a team!");
+            throw std::runtime_error("team is already full! | new member is already in a team!");
         }
 
+        // adding the new team member:
         _teamArray[_currTeamSize++] = newTeamMember;
         newTeamMember->setIsInTeam();
 
@@ -50,13 +47,15 @@ namespace ariel
             _ninjasArray[_currNinjasSize++] = newTeamMember;
         }
     }
+
     void Team::attack(Team *enemyTeam)
     {
-printf("reached here\n");
+        // can't attack a nullptr team:
         if (enemyTeam == nullptr)
         {
             throw std::invalid_argument("victim can't be nullptr");
         }
+
         // if the attacked team is already dead then throw an error:
         if (enemyTeam->stillAlive() == 0)
         {
@@ -67,37 +66,33 @@ printf("reached here\n");
         // if the attacking team is all dead, then the attack is over
         if (stillAlive() == 0)
         {
-             printf("attacking team is all dead\n");
             return;
         }
+
         // if the leader is dead then first pick a new leader:
         if (!(_leader->isAlive()))
         {
-            printf("attacking team's leader is dead, finding new leader...\n");
             updateLeader();
-            printf("new leader: "); _leader->print();
         }
 
         // find the enemy team's victim (closest to the attacking team's leader):
         Character *victim = findNewVictim(enemyTeam);
-        std::cout << "new victim found: "<< victim->getName()<<std::endl;
-        printf("new victim found: ");victim->print();
 
         // incase the entire enemy team is dead, a nullptr will be returned, and the attack is over:
         if (victim == nullptr)
         {
-            printf("attacked team is all dead\n");
             return;
         }
 
         // first, all the cowboys attack:
-        for (int i = 0; i < _currCowboysSize; i++)
+        for (int i = 0; i < _currCowboysSize; ++i)
         {
             // if the victim is already dead, find new victim:
             if (!(victim->isAlive()))
             {
                 victim = findNewVictim(enemyTeam);
-                // incase the entire enemy team is dead, a nullptr will be returned, and the attack is over:
+                // incase the entire enemy team is dead,
+                // a nullptr will be returned, and the attack is over:
                 if (victim == nullptr)
                 {
                     return;
@@ -110,13 +105,14 @@ printf("reached here\n");
         }
 
         // after that, all the ninjas attack:
-        for (int i = 0; i < _currNinjasSize; i++)
+        for (int i = 0; i < _currNinjasSize; ++i)
         {
             // if the victim is already dead, find new victim:
             if (!(victim->isAlive()))
             {
                 victim = findNewVictim(enemyTeam);
-                // incase the entire enemy team is dead, a nullptr will be returned, and the attack is over:
+                // incase the entire enemy team is dead,
+                // a nullptr will be returned, and the attack is over:
                 if (victim == nullptr)
                 {
                     return;
@@ -128,6 +124,7 @@ printf("reached here\n");
             }
         }
     }
+
     int Team::stillAlive() const
     {
         int count = 0;
@@ -143,19 +140,30 @@ printf("reached here\n");
     void Team::print() const
     {
         // first, all the cowboys print:
-        for (int i = 0; i < _currCowboysSize; i++)
+        for (int i = 0; i < _currCowboysSize; ++i)
         {
             _cowboysArray[i]->print();
         }
 
         // after that, all the ninjas print:
-        for (int i = 0; i < _currNinjasSize; i++)
+        for (int i = 0; i < _currNinjasSize; ++i)
         {
             _ninjasArray[i]->print();
         }
     }
 
     // my added functions:
+
+    int Team::getCurrTeamSize() const{ return _currTeamSize; }
+    Character *Team::getCharacterAt(int index) 
+    {
+        if (index >=0 &&index < _currTeamSize)
+        {
+            return _teamArray[index];
+        }
+        return nullptr;
+    }
+
     Character *Team::findNewVictim(Team *enemyTeam)
     {
         // the entire enemy team might be already all dead:
@@ -184,9 +192,9 @@ printf("reached here\n");
                 }
             }
         }
-
         return minDistEnemy;
     }
+
     void Team::updateLeader()
     {
         double minDistance = numeric_limits<double>::max();
@@ -211,9 +219,6 @@ printf("reached here\n");
         if (minDistCharacter != nullptr)
         {
             _leader = minDistCharacter;
-            // cout << "the new leader is: " << _leader->getName()<<
-            // to_string(_leader->getLocation().getX())<<" , "<<
-            // to_string(_leader->getLocation().getX()) <<endl ;
         }
     }
 };
