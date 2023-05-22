@@ -10,12 +10,12 @@ namespace ariel
     Cowboy::Cowboy(std::string name, Point characterLoction)
         : Character(name, characterLoction), _bulletAmount(BULLETAMOUNT)
     {
-        _hitPoints = COWBOY_HP;
+        setHP(COWBOY_HP);
     }
 
-    Cowboy::~Cowboy()
-    {
-    }
+    // Cowboy::~Cowboy()
+    // {
+    // }
 
     // functions to implement:
     void Cowboy::shoot(Character *enemy)
@@ -49,14 +49,14 @@ namespace ariel
     {
         if (isAlive())
         {
-            cout << "C " << _name << " " << _hitPoints << " (" << _location.getX() << "," << _location.getY() << ")" << endl;
-            return "C " + _name + " " + to_string(_hitPoints) + " (" + to_string(_location.getX()) + "," + to_string(_location.getY()) + ") \n";
+            cout << "C " << getName() << " " << getHP() << " (" << getLocation().getX() << "," << getLocation().getY() << ")" << endl;
+            return "C " + getName() + " " + to_string(getHP()) + " (" + to_string(getLocation().getX()) + "," + to_string(getLocation().getY()) + ") \n";
         }
 
         // else hitPoints = 0:
-        cout << "C (" << _name << ") "
-             << "(" << _location.getX() << "," << _location.getY() << ")" << endl;
-        return "C (" + _name + ") " + "(" + to_string(_location.getX()) + "," + to_string(_location.getY()) + ")\n";
+        cout << "C (" << getName() << ") "
+             << "(" << getLocation().getX() << "," << getLocation().getY() << ")" << endl;
+        return "C (" + getName() + ") " + "(" + to_string(getLocation().getX()) + "," + to_string(getLocation().getY()) + ")\n";
     }
 
     // my added functions:

@@ -10,7 +10,7 @@ namespace ariel
     public:
         // Ctors & Dtors:
         TrainedNinja(std::string name, Point characterLoction);
-        ~TrainedNinja();
+        //~TrainedNinja();
     };
 
 } // namespace ariel

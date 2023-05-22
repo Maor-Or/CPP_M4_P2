@@ -7,7 +7,7 @@ namespace ariel
 {
     class Ninja : public Character
     {
-    protected:
+    private:
         
         int _speed;
 
@@ -15,15 +15,17 @@ namespace ariel
 
         // Ctors & Dtors:
         Ninja(std::string name, Point characterLoction);
-        ~Ninja();
+        //~Ninja();
     
         //functions to implement:
         void move(const Character *enemy);
         void slash(Character *enemy) const;
-        std::string print() const;
+        std::string print() const override;
         
         //my added functions:
-        void attackTarget(Character*enemy);
+        void attackTarget(Character*enemy) override;
+        int getSpeed() const;
+        void setSpeed(int newSpeed);
 
     };
     

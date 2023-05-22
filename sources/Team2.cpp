@@ -12,9 +12,9 @@ namespace ariel
     {
     }
 
-    Team2::~Team2()
-    {
-    }
+    // Team2::~Team2()
+    // {
+    // }
 
     // functions to implement:
     void Team2::attack(Team *enemyTeam)
@@ -39,7 +39,7 @@ namespace ariel
         }
 
         // if the leader is dead then first pick a new leader:
-        if (!(_leader->isAlive()))
+        if (!(getLeader()->isAlive()))
         {
             updateLeader();
         }
@@ -54,7 +54,7 @@ namespace ariel
         }
 
         // go through all the team, by order of addition:
-        for (int i = 0; i < _currTeamSize; i++)
+        for (unsigned long i = 0; i < getCurrTeamSize(); i++)
         {
             // if the victim is already dead, find new victim:
             if (!(victim->isAlive()))
@@ -67,10 +67,15 @@ namespace ariel
                     return;
                 }
             }
-            if (_teamArray[i]->isAlive())
+            // if (_teamArray[i]->isAlive())
+            // {
+            //     _teamArray[i]->attackTarget(victim);
+            // }
+            if (getTeamArray().at(i)->isAlive())
             {
-                _teamArray[i]->attackTarget(victim);
+                getTeamArray().at(i)->attackTarget(victim);
             }
+            
         }
     }
 

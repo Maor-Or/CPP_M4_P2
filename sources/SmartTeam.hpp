@@ -12,10 +12,10 @@ namespace ariel
     public:
         // Ctors & Dtors:
         SmartTeam(Character *leader);
-        ~SmartTeam();
+        //~SmartTeam();
 
         // functions to implement:
-        void attack(Team *enemyTeam);
+        void attack(Team *enemyTeam) override;
         
         //my added functions:
         int analizeEnemyTeam(Team *enemyTeam);

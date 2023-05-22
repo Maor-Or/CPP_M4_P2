@@ -7,35 +7,61 @@
 #include "TrainedNinja.hpp"
 #include "OldNinja.hpp"
 
-#define MAX_TEAM_SIZE 10
+#include <array>
 
 namespace ariel
 {
+    static constexpr int MAX_TEAM_SIZE = 10;
+
     class Team
     {
-    protected:
-        Character *_teamArray[MAX_TEAM_SIZE];
-        Character *_cowboysArray[MAX_TEAM_SIZE];
-        Character *_ninjasArray[MAX_TEAM_SIZE];
-        Character *_leader;
-        int _currTeamSize, _currCowboysSize, _currNinjasSize;
+    private:
+        std::array<Character *, MAX_TEAM_SIZE> teamArray;
+        std::array<Character *, MAX_TEAM_SIZE> ninjasArray;
+        std::array<Character *, MAX_TEAM_SIZE> cowboysArray;
 
-        // my added private functions:
-        void updateLeader();
-        Character *findNewVictim(Team *enemyTeam);
+        // Character *_teamArray[MAX_TEAM_SIZE];
+        // Character *_cowboysArray[MAX_TEAM_SIZE];
+        // Character *_ninjasArray[MAX_TEAM_SIZE];
+
+        Character *_leader;
+        unsigned long _currTeamSize, _currCowboysSize, _currNinjasSize;
 
     public:
         // Ctors & Dtors:
         Team(Character *leader);
-        ~Team();
+        virtual ~Team();
+ // Delete copy operations
+        Team(const Team&) = delete;
+        Team& operator=(const Team&) = delete;
+          // Delete move operations
+        Team(Team&&) = delete;
+        Team& operator=(Team&&) = delete;
+
+        // Default destructor
+        //~Team() = default;
+
 
         // functions to implement:
         void add(Character *newTeamMember);
         virtual void attack(Team *enemyTeam);
         int stillAlive() const;
         void print() const;
+
+        // my added functions:
+        void updateLeader();
+        Character *findNewVictim(Team *enemyTeam);
+
+        // getters & setters:
         int getCurrTeamSize() const;
-        Character *getCharacterAt(int index);
+        Character *getCharacterAt(unsigned long index);
+        Character* getLeader();
+        unsigned long getCurrTeamSize();
+        unsigned long getCurrCowboysSize();
+        unsigned long getCurrNinjasSize();
+        std::array<Character *, MAX_TEAM_SIZE> &getTeamArray();
+        std::array<Character *, MAX_TEAM_SIZE> &getNinjasArray();
+        std::array<Character *, MAX_TEAM_SIZE> &getCowboyArray();
     };
 
 };

@@ -8,10 +8,10 @@ namespace ariel
 {
 
     // Ctors & Dtors:
-    Point::Point(double x, double y) : _x(x), _y(y)
+    Point::Point(double xloc, double yloc) : _xLoc(xloc), _yLoc(yloc)
     {
     }
-    Point::Point(const Point &other) : _x(other.getX()), _y(other.getY())
+    Point::Point(const Point &other) : _xLoc(other.getX()), _yLoc(other.getY())
     {
     }
 
@@ -19,12 +19,31 @@ namespace ariel
     {
     }
 
+    // Move Constructor
+    Point::Point(Point &&other) noexcept
+        : _xLoc(other._xLoc), _yLoc(other._yLoc)
+    {
+        // Move any necessary resources from 'other' to 'this'
+    }
+
+    // Move Assignment Operator
+    Point &Point::operator=(Point &&other) noexcept
+    {
+        if (this != &other)
+        {
+            // Move any necessary resources from 'other' to 'this'
+            _xLoc = other._xLoc;
+            _yLoc = other._yLoc;
+        }
+        return *this;
+    }
+
     // functions to implement:
     double Point::distance(Point other) const
     {
-        return sqrt(pow((_x - other.getX()), 2) + pow((_y - other.getY()), 2));
+        return sqrt(pow((_xLoc - other.getX()), 2) + pow((_yLoc - other.getY()), 2));
     }
-    void Point::print() { std::cout << "(" << _x << "," << _y << ")\n"; }
+    void Point::print() { std::cout << "(" << _xLoc << "," << _yLoc << ")\n"; }
     Point Point::moveTowards(Point origin, Point destination, double distance)
     {
         // negative distance is invalid:
@@ -47,27 +66,27 @@ namespace ariel
 
         double ratio = distance / currDistance;
 
-        double new_x_location =
+        double new_xLoc_location =
             origin.getX() + (destination.getX() - origin.getX()) * ratio;
 
-        double new_y_location =
+        double new_yLoc_location =
             origin.getY() + (destination.getY() - origin.getY()) * ratio;
 
-        // Point p_res(new_x_location, new_y_location);
+        // Point p_res(new_xLoc_location, new_yLoc_location);
         // return p_res;
-        return {new_x_location, new_y_location};
+        return {new_xLoc_location, new_yLoc_location};
     }
 
     // my added functions:
-    double Point::getX() const { return _x; }
-    double Point::getY() const { return _y; }
+    double Point::getX() const { return _xLoc; }
+    double Point::getY() const { return _yLoc; }
     Point &Point::operator=(const Point &other)
     {
-        _x = other._x;
-        _y = other._y;
+        _xLoc = other._xLoc;
+        _yLoc = other._yLoc;
         return *this;
     }
-    void Point::setX(double newx) { _x = newx; }
-    void Point::setY(double newy) { _y = newy; }
+    void Point::setX(double newx) { _xLoc = newx; }
+    void Point::setY(double newy) { _yLoc = newy; }
 
 };

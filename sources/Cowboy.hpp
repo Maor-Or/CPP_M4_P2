@@ -3,11 +3,12 @@
 #include "Character.hpp"
 #include <string>
 
-#define BULLETAMOUNT 6
-#define COWBOY_HP 110
 
 namespace ariel
 {
+    constexpr int COWBOY_HP = 110;
+    constexpr int BULLETAMOUNT = 6;
+    
     class Cowboy : public Character
     {
     private:
@@ -16,15 +17,15 @@ namespace ariel
     public:
         // Ctors & Dtors:
         Cowboy(std::string name, Point characterLoction);
-        ~Cowboy();
+        //~Cowboy() override;
 
         // functions to implement:
         void shoot(Character *enemy);
         bool hasboolets() const;
         void reload();
-        std::string print() const;
+        std::string print()const override;
 
         // my added functions:
-        void attackTarget(Character *enemy);
+        void attackTarget(Character *enemy) override;
     };
 } // namespace ariel

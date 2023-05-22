@@ -10,10 +10,10 @@ namespace ariel
     public:
         // Ctors & Dtors:
         Team2(Character *leader);
-        ~Team2();
+        //~Team2();
 
         // functions to implement:
-        void attack(Team *enemyTeam);
+        void attack(Team *enemyTeam) override;
     };
 
 } // namespace ariel

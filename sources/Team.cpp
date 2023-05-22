@@ -17,9 +17,10 @@ namespace ariel
     Team::~Team()
     {
         // freeing the teamates from the heap allocation:
-        for (int i = 0; i < _currTeamSize; i++)
+        for (unsigned long i = 0; i < _currTeamSize; i++)
         {
-            delete _teamArray[i];
+            // delete _teamArray[i];
+            delete teamArray.at(i);
         }
     }
 
@@ -32,19 +33,22 @@ namespace ariel
         }
 
         // adding the new team member:
-        _teamArray[_currTeamSize++] = newTeamMember;
+        // _teamArray[_currTeamSize++] = newTeamMember;
+        teamArray.at(_currTeamSize++) = newTeamMember;
         newTeamMember->setIsInTeam();
 
         // if the new teamate is a cowboy then add it to the cowboys array:
         if (Cowboy *cowboyPtr = dynamic_cast<Cowboy *>(newTeamMember))
         {
-            _cowboysArray[_currCowboysSize++] = newTeamMember;
+            // _cowboysArray[_currCowboysSize++] = newTeamMember;
+            cowboysArray.at(_currCowboysSize++) = newTeamMember;
         }
 
         // if the new teamate is a ninja then add it to the ninjas array:
         else if (Ninja *ninjaPtr = dynamic_cast<Ninja *>(newTeamMember))
         {
-            _ninjasArray[_currNinjasSize++] = newTeamMember;
+            // _ninjasArray[_currNinjasSize++] = newTeamMember;
+            ninjasArray.at(_currNinjasSize++) = newTeamMember;
         }
     }
 
@@ -85,7 +89,7 @@ namespace ariel
         }
 
         // first, all the cowboys attack:
-        for (int i = 0; i < _currCowboysSize; ++i)
+        for (unsigned long i = 0; i < _currCowboysSize; ++i)
         {
             // if the victim is already dead, find new victim:
             if (!(victim->isAlive()))
@@ -98,14 +102,18 @@ namespace ariel
                     return;
                 }
             }
-            if (_cowboysArray[i]->isAlive())
+            // if (_cowboysArray[i]->isAlive())
+            // {
+            //     _cowboysArray[i]->attackTarget(victim);
+            // }
+            if (cowboysArray.at(i)->isAlive())
             {
-                _cowboysArray[i]->attackTarget(victim);
+                cowboysArray.at(i)->attackTarget(victim);
             }
         }
 
         // after that, all the ninjas attack:
-        for (int i = 0; i < _currNinjasSize; ++i)
+        for (unsigned long i = 0; i < _currNinjasSize; ++i)
         {
             // if the victim is already dead, find new victim:
             if (!(victim->isAlive()))
@@ -118,9 +126,13 @@ namespace ariel
                     return;
                 }
             }
-            if (_ninjasArray[i]->isAlive())
+            // if (_ninjasArray[i]->isAlive())
+            // {
+            //     _ninjasArray[i]->attackTarget(victim);
+            // }
+            if (ninjasArray.at(i)->isAlive())
             {
-                _ninjasArray[i]->attackTarget(victim);
+                ninjasArray.at(i)->attackTarget(victim);
             }
         }
     }
@@ -128,11 +140,15 @@ namespace ariel
     int Team::stillAlive() const
     {
         int count = 0;
-        for (int i = 0; i < _currTeamSize; ++i)
+        for (unsigned long i = 0; i < _currTeamSize; ++i)
         {
-            if (_teamArray[i]->isAlive())
+            // if (_teamArray[i]->isAlive())
+            // {
+            //     ++count;
+            // }
+            if (teamArray.at(i)->isAlive())
             {
-                ++count;
+                count++;
             }
         }
         return count;
@@ -140,28 +156,72 @@ namespace ariel
     void Team::print() const
     {
         // first, all the cowboys print:
-        for (int i = 0; i < _currCowboysSize; ++i)
+        // for (int i = 0; i < _currCowboysSize; ++i)
+        // {
+        //     _cowboysArray[i]->print();
+        // }
+        for (unsigned long i = 0; i < _currCowboysSize; ++i)
         {
-            _cowboysArray[i]->print();
+            cowboysArray.at(i)->print();
         }
 
         // after that, all the ninjas print:
-        for (int i = 0; i < _currNinjasSize; ++i)
+        // for (int i = 0; i < _currNinjasSize; ++i)
+        // {
+        //     _ninjasArray[i]->print();
+        // }
+        for (unsigned long i = 0; i < _currNinjasSize; ++i)
         {
-            _ninjasArray[i]->print();
+            ninjasArray.at(i)->print();
         }
     }
 
     // my added functions:
 
-    int Team::getCurrTeamSize() const{ return _currTeamSize; }
-    Character *Team::getCharacterAt(int index) 
+    int Team::getCurrTeamSize() const { return _currTeamSize; }
+    Character *Team::getCharacterAt(unsigned long index)
     {
-        if (index >=0 &&index < _currTeamSize)
+        if (index >= 0 && index < _currTeamSize)
         {
-            return _teamArray[index];
+            return teamArray.at(index);
+            // return _teamArray[index];
         }
         return nullptr;
+    }
+
+    Character *Team::getLeader()
+    {
+        return _leader;
+    }
+
+    unsigned long Team::getCurrTeamSize()
+    {
+        return _currTeamSize;
+    }
+
+    unsigned long Team::getCurrCowboysSize()
+    {
+        return _currCowboysSize;
+    }
+
+    unsigned long Team::getCurrNinjasSize()
+    {
+        return _currNinjasSize;
+    }
+
+    std::array<Character *, MAX_TEAM_SIZE> &Team::getTeamArray()
+    {
+        return teamArray;
+    }
+
+    std::array<Character *, MAX_TEAM_SIZE> &Team::getNinjasArray()
+    {
+        return ninjasArray;
+    }
+
+    std::array<Character *, MAX_TEAM_SIZE> &Team::getCowboyArray()
+    {
+        return cowboysArray;
     }
 
     Character *Team::findNewVictim(Team *enemyTeam)
@@ -177,9 +237,10 @@ namespace ariel
         Character *currCharacter = nullptr, *minDistEnemy = nullptr;
 
         // goes through all enemys to find the right victim:
-        for (int i = 0; i < enemyTeam->_currTeamSize; i++)
+        for (unsigned long i = 0; i < enemyTeam->_currTeamSize; i++)
         {
-            currCharacter = enemyTeam->_teamArray[i];
+            // currCharacter = enemyTeam->_teamArray[i];
+            currCharacter = enemyTeam->teamArray.at(i);
 
             // checking if the enemy is alive:
             if (currCharacter->isAlive())
@@ -201,9 +262,10 @@ namespace ariel
         Character *currCharacter = nullptr, *minDistCharacter = nullptr;
 
         // goes through all teamates to find the right leader:
-        for (int i = 0; i < _currTeamSize; i++)
+        for (unsigned long i = 0; i < _currTeamSize; i++)
         {
-            currCharacter = _teamArray[i];
+            // currCharacter = _teamArray[i];
+            currCharacter = teamArray.at(i);
 
             // checking if the teamate is alive (and not the leader, because the leader is already dead)
             if (currCharacter->isAlive()) //&&currCharacter!=_leader)

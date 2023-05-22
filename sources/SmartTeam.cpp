@@ -12,9 +12,9 @@ namespace ariel
     {
     }
 
-    SmartTeam::~SmartTeam()
-    {
-    }
+    // SmartTeam::~SmartTeam()
+    // {
+    // }
 
     // functions to implement:
     void SmartTeam::attack(Team *enemyTeam)
@@ -40,7 +40,7 @@ namespace ariel
         }
 
         // if the leader is dead then first pick a new leader:
-        if (!(_leader->isAlive()))
+        if (!(getLeader()->isAlive()))
         {
             updateLeader();
         }
@@ -55,7 +55,7 @@ namespace ariel
         }
 
         // go through all the cowboys first, by order of addition:
-        for (int i = 0; i < _currCowboysSize; i++)
+        for (unsigned long i = 0; i < getCurrCowboysSize(); i++)
         {
             victim = findNewVictim(enemyTeam);
             // incase the entire enemy team is dead,
@@ -66,7 +66,11 @@ namespace ariel
             }
 
             // if the cowboy is dead, can't attack:
-            if (_cowboysArray[i]->isAlive() == 0)
+            // if (_cowboysArray[i]->isAlive() == 0)
+            // {
+            //     continue;
+            // }
+             if (getCowboyArray().at(i)->isAlive() == 0)
             {
                 continue;
             }
@@ -81,7 +85,7 @@ namespace ariel
             and the cowboys can be protected, then use CAMP strategy
             */
             case 0:
-                camp(_cowboysArray[i], enemyTeam);
+                camp(getCowboyArray().at(i), enemyTeam);
                 continue;
 
             /*
@@ -89,7 +93,7 @@ namespace ariel
             then the ninjas should try getting the cowboys using RUSH strategy
             */
             case 1:
-                rush(_cowboysArray[i], enemyTeam);
+                rush(getCowboyArray().at(i), enemyTeam);
                 continue;
 
             /*
@@ -97,7 +101,7 @@ namespace ariel
             while the ninjas go to their closest prays, using BRAWL strategy
             */
             case 2:
-                brawl(_cowboysArray[i], enemyTeam);
+                brawl(getCowboyArray().at(i), enemyTeam);
                 continue;
 
             default:
@@ -106,7 +110,7 @@ namespace ariel
         }
 
         // go through all the ninjas secondly, by order of addition:
-        for (int i = 0; i < _currNinjasSize; i++)
+        for (unsigned long i = 0; i < getCurrNinjasSize(); i++)
         {
             victim = findNewVictim(enemyTeam);
             // incase the entire enemy team is dead,
@@ -117,7 +121,7 @@ namespace ariel
             }
 
             // if the ninja is dead, can't attack:
-            if (_ninjasArray[i]->isAlive() == 0)
+            if (getNinjasArray().at(i)->isAlive() == 0)
             {
                 continue;
             }
@@ -128,15 +132,15 @@ namespace ariel
             switch (strategy)
             {
             case 0:
-                camp(_ninjasArray[i], enemyTeam);
+                camp(getNinjasArray().at(i), enemyTeam);
                 continue;
 
             case 1:
-                rush(_ninjasArray[i], enemyTeam);
+                rush(getNinjasArray().at(i), enemyTeam);
                 continue;
 
             case 2:
-                brawl(_ninjasArray[i], enemyTeam);
+                brawl(getNinjasArray().at(i), enemyTeam);
                 continue;
 
             default:
@@ -151,12 +155,12 @@ namespace ariel
         bool attackingTeamCowboys = false;
 
         // checking if the attacking team has living cowboys:
-        for (int i = 0; i < _currCowboysSize; ++i)
+        for (unsigned long i = 0; i < getCurrCowboysSize(); ++i)
         {
-            if (_teamArray[i]->isAlive())
+            if (getTeamArray().at(i)->isAlive())
             {
                 // attacking team has cowboys:
-                if (Cowboy *cowboyPtr = dynamic_cast<Cowboy *>(_teamArray[i]))
+                if (Cowboy *cowboyPtr = dynamic_cast<Cowboy *>(getTeamArray().at(i)))
                 {
                     attackingTeamCowboys = true;
                     break;
@@ -167,7 +171,7 @@ namespace ariel
         int enemyTeamSize = enemyTeam->getCurrTeamSize();
 
         // checking for cowboys on the defending team:
-        for (int i = 0; i < enemyTeamSize; ++i)
+        for (unsigned long i = 0; i < enemyTeamSize; ++i)
         {
             if (enemyTeam->getCharacterAt(i)->isAlive())
             {
@@ -298,7 +302,7 @@ namespace ariel
         Character *currEnemy = nullptr;
 
         // looking for close ninjas:
-        for (int i = 0; i < currEnemyTeamSize; ++i)
+        for (unsigned long i = 0; i < currEnemyTeamSize; ++i)
         {
             currEnemy = enemyTeam->getCharacterAt(i);
             if (currEnemy->isAlive())
@@ -322,7 +326,7 @@ namespace ariel
         int currEnemyTeamSize = enemyTeam->getCurrTeamSize();
 
         // looking for closest cowboy:
-        for (int i = 0; i < currEnemyTeamSize; ++i)
+        for (unsigned long i = 0; i < currEnemyTeamSize; ++i)
         {
             currEnemy = enemyTeam->getCharacterAt(i);
             if (currEnemy->isAlive())
@@ -348,7 +352,7 @@ namespace ariel
         int currEnemyTeamSize = enemyTeam->getCurrTeamSize();
 
         // looking for furtherst cowboy:
-        for (int i = 0; i < currEnemyTeamSize; ++i)
+        for (unsigned long i = 0; i < currEnemyTeamSize; ++i)
         {
             currEnemy = enemyTeam->getCharacterAt(i);
             if (currEnemy->isAlive())
@@ -374,7 +378,7 @@ namespace ariel
         int currEnemyTeamSize = enemyTeam->getCurrTeamSize();
 
         // looking for closest cowboy:
-        for (int i = 0; i < currEnemyTeamSize; ++i)
+        for (unsigned long i = 0; i < currEnemyTeamSize; ++i)
         {
             currEnemy = enemyTeam->getCharacterAt(i);
             if (currEnemy->isAlive())
@@ -401,7 +405,7 @@ namespace ariel
         int currEnemyTeamSize = enemyTeam->getCurrTeamSize();
 
         // looking for lowest hp enemy:
-        for (int i = 0; i < currEnemyTeamSize; ++i)
+        for (unsigned long i = 0; i < currEnemyTeamSize; ++i)
         {
             currEnemy = enemyTeam->getCharacterAt(i);
             if (currEnemy->isAlive())
@@ -424,7 +428,7 @@ namespace ariel
         int currEnemyTeamSize = enemyTeam->getCurrTeamSize();
 
         // looking for lowest hp cowboy:
-        for (int i = 0; i < currEnemyTeamSize; ++i)
+        for (unsigned long i = 0; i < currEnemyTeamSize; ++i)
         {
             currEnemy = enemyTeam->getCharacterAt(i);
             if (currEnemy->isAlive())
@@ -450,7 +454,7 @@ namespace ariel
         int currEnemyTeamSize = enemyTeam->getCurrTeamSize();
 
         // looking for closest enemy:
-        for (int i = 0; i < currEnemyTeamSize; ++i)
+        for (unsigned long i = 0; i < currEnemyTeamSize; ++i)
         {
             currEnemy = enemyTeam->getCharacterAt(i);
             if (currEnemy->isAlive())

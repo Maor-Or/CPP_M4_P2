@@ -6,11 +6,11 @@ namespace ariel
     OldNinja::OldNinja(std::string name, Point characterLoction)
         : Ninja(name, characterLoction)
     {
-        _hitPoints = 150;
-        _speed = 8;
+        setHP(OLD_NINJA_HP);
+        setSpeed(OLD_NINJA_SPEED);
     }
 
-    OldNinja::~OldNinja()
-    {
-    }
+    // OldNinja::~OldNinja()
+    // {
+    // }
 } // namespace ariel

@@ -6,11 +6,11 @@ namespace ariel
     TrainedNinja::TrainedNinja(std::string name, Point characterLoction)
         : Ninja(name, characterLoction)
     {
-        _hitPoints = 120;
-        _speed = 12;
+        setHP(120);
+        setSpeed(12);
     }
 
-    TrainedNinja::~TrainedNinja()
-    {
-    }
+    // TrainedNinja::~TrainedNinja()
+    // {
+    // }
 } // namespace ariel

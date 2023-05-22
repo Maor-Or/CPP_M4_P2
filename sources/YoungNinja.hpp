@@ -11,7 +11,7 @@ namespace ariel
     public:
         // Ctors & Dtors:
         YoungNinja(std::string name, Point characterLoction);
-        ~YoungNinja();
+        //~YoungNinja();
     };
 
 } // namespace ariel

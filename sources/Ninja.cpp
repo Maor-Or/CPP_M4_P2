@@ -14,14 +14,14 @@ namespace ariel
     {
     }
 
-    Ninja::~Ninja()
-    {
-    }
+    // Ninja::~Ninja()
+    // {
+    // }
 
     // functions to implement:
     void Ninja::move(const Character *enemy)
     {
-        _location = Point::moveTowards(_location, enemy->getLocation(), _speed);
+        setLocation(Point::moveTowards(getLocation(), enemy->getLocation(), _speed));
     }
 
     void Ninja::slash(Character *enemy) const
@@ -32,7 +32,7 @@ namespace ariel
             throw std::runtime_error("can't shoot a dead enemy | dead cowboy can't shoot | can't shoot self");
         }
 
-        double distance = _location.distance(enemy->getLocation());
+        double distance = getLocation().distance(enemy->getLocation());
 
         if (isAlive() && distance < 1)
         {
@@ -44,14 +44,14 @@ namespace ariel
     {
         if (isAlive())
         {
-            cout << "N " << _name << " " << _hitPoints << " (" << _location.getX() << "," << _location.getY() << ")" << endl;
-            return "N " + _name + " " + to_string(_hitPoints) + " (" + to_string(_location.getX()) + "," + to_string(_location.getY()) + ") \n";
+            cout << "N " << getName() << " " << getHP() << " (" << getLocation().getX() << "," << getLocation().getY() << ")" << endl;
+            return "N " + getName() + " " + to_string(getHP()) + " (" + to_string(getLocation().getX()) + "," + to_string(getLocation().getY()) + ") \n";
         }
 
         // else hitPoints = 0:
-        cout << "N (" << _name << ") "
-             << "(" << _location.getX() << "," << _location.getY() << ")" << endl;
-        return "N (" + _name + ") " + "(" + to_string(_location.getX()) + "," + to_string(_location.getY()) + ")\n";
+        cout << "N (" << getName() << ") "
+             << "(" << getLocation().getX() << "," << getLocation().getY() << ")" << endl;
+        return "N (" + getName() + ") " + "(" + to_string(getLocation().getX()) + "," + to_string(getLocation().getY()) + ")\n";
     }
 
     // my added functions:
@@ -65,6 +65,16 @@ namespace ariel
         {
             move(enemy);
         }
+    }
+
+    int Ninja::getSpeed() const
+    {
+        return _speed;
+    }
+
+    void Ninja::setSpeed(int newSpeed)
+    {
+        _speed = newSpeed;
     }
 
 } // namespace ariel
