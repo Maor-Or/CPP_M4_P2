@@ -10,7 +10,4 @@ namespace ariel
         setSpeed(OLD_NINJA_SPEED);
     }
 
-    // OldNinja::~OldNinja()
-    // {
-    // }
 } // namespace ariel

@@ -13,9 +13,6 @@ namespace ariel
         setHP(COWBOY_HP);
     }
 
-    // Cowboy::~Cowboy()
-    // {
-    // }
 
     // functions to implement:
     void Cowboy::shoot(Character *enemy)

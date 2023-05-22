@@ -15,7 +15,6 @@ namespace ariel
 
         // Ctors & Dtors:
         Ninja(std::string name, Point characterLoction);
-        //~Ninja();
     
         //functions to implement:
         void move(const Character *enemy);
@@ -24,6 +23,8 @@ namespace ariel
         
         //my added functions:
         void attackTarget(Character*enemy) override;
+        
+        //getters & setters:
         int getSpeed() const;
         void setSpeed(int newSpeed);
 

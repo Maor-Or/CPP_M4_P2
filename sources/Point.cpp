@@ -19,11 +19,11 @@ namespace ariel
     {
     }
 
+    //for tidy:
     // Move Constructor
     Point::Point(Point &&other) noexcept
         : _xLoc(other._xLoc), _yLoc(other._yLoc)
     {
-        // Move any necessary resources from 'other' to 'this'
     }
 
     // Move Assignment Operator
@@ -31,7 +31,6 @@ namespace ariel
     {
         if (this != &other)
         {
-            // Move any necessary resources from 'other' to 'this'
             _xLoc = other._xLoc;
             _yLoc = other._yLoc;
         }
@@ -72,8 +71,6 @@ namespace ariel
         double new_yLoc_location =
             origin.getY() + (destination.getY() - origin.getY()) * ratio;
 
-        // Point p_res(new_xLoc_location, new_yLoc_location);
-        // return p_res;
         return {new_xLoc_location, new_yLoc_location};
     }
 

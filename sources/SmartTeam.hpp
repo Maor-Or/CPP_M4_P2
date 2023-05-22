@@ -4,6 +4,11 @@
 
 namespace ariel
 {
+    static constexpr int CAMP = 0;
+    static constexpr int RUSH = 1;
+    static constexpr int BRAWL = 2;
+
+
     class SmartTeam : public Team
     {
     private:
@@ -12,7 +17,6 @@ namespace ariel
     public:
         // Ctors & Dtors:
         SmartTeam(Character *leader);
-        //~SmartTeam();
 
         // functions to implement:
         void attack(Team *enemyTeam) override;

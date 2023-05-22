@@ -12,10 +12,6 @@ namespace ariel
     {
     }
 
-    // SmartTeam::~SmartTeam()
-    // {
-    // }
-
     // functions to implement:
     void SmartTeam::attack(Team *enemyTeam)
     {
@@ -66,10 +62,6 @@ namespace ariel
             }
 
             // if the cowboy is dead, can't attack:
-            // if (_cowboysArray[i]->isAlive() == 0)
-            // {
-            //     continue;
-            // }
              if (getCowboyArray().at(i)->isAlive() == 0)
             {
                 continue;
@@ -84,7 +76,7 @@ namespace ariel
             if there are cowboys on the attacking team and no cowboys on the attacked team,
             and the cowboys can be protected, then use CAMP strategy
             */
-            case 0:
+            case CAMP:
                 camp(getCowboyArray().at(i), enemyTeam);
                 continue;
 
@@ -92,7 +84,7 @@ namespace ariel
             if there are no cowboys on the attacking team and there are cowboys on the attacked team,
             then the ninjas should try getting the cowboys using RUSH strategy
             */
-            case 1:
+            case RUSH:
                 rush(getCowboyArray().at(i), enemyTeam);
                 continue;
 
@@ -100,7 +92,7 @@ namespace ariel
             if none of the above happens, cowboys should kill the other cowboys
             while the ninjas go to their closest prays, using BRAWL strategy
             */
-            case 2:
+            case BRAWL:
                 brawl(getCowboyArray().at(i), enemyTeam);
                 continue;
 
@@ -131,15 +123,15 @@ namespace ariel
 
             switch (strategy)
             {
-            case 0:
+            case CAMP:
                 camp(getNinjasArray().at(i), enemyTeam);
                 continue;
 
-            case 1:
+            case RUSH:
                 rush(getNinjasArray().at(i), enemyTeam);
                 continue;
 
-            case 2:
+            case BRAWL:
                 brawl(getNinjasArray().at(i), enemyTeam);
                 continue;
 
@@ -179,12 +171,12 @@ namespace ariel
                 if (Cowboy *cowboyPtr = dynamic_cast<Cowboy *>(enemyTeam->getCharacterAt(i)))
                 {
                     // 2 - both teams have cowboys, BRAWL. 1 - only enemy team has cowboys, RUSH
-                    return attackingTeamCowboys ? 2 : 1;
+                    return attackingTeamCowboys ? BRAWL : RUSH;
                 }
             }
         }
         // 0 - only attacking team has cowboys, CAMP. 1 - no team has cowboys, RUSH
-        return attackingTeamCowboys ? 0 : 1;
+        return attackingTeamCowboys ? CAMP : RUSH;
     }
 
     /*

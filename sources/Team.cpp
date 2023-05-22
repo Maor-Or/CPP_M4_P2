@@ -19,7 +19,6 @@ namespace ariel
         // freeing the teamates from the heap allocation:
         for (unsigned long i = 0; i < _currTeamSize; i++)
         {
-            // delete _teamArray[i];
             delete teamArray.at(i);
         }
     }
@@ -33,21 +32,18 @@ namespace ariel
         }
 
         // adding the new team member:
-        // _teamArray[_currTeamSize++] = newTeamMember;
         teamArray.at(_currTeamSize++) = newTeamMember;
         newTeamMember->setIsInTeam();
 
         // if the new teamate is a cowboy then add it to the cowboys array:
         if (Cowboy *cowboyPtr = dynamic_cast<Cowboy *>(newTeamMember))
         {
-            // _cowboysArray[_currCowboysSize++] = newTeamMember;
             cowboysArray.at(_currCowboysSize++) = newTeamMember;
         }
 
         // if the new teamate is a ninja then add it to the ninjas array:
         else if (Ninja *ninjaPtr = dynamic_cast<Ninja *>(newTeamMember))
         {
-            // _ninjasArray[_currNinjasSize++] = newTeamMember;
             ninjasArray.at(_currNinjasSize++) = newTeamMember;
         }
     }
@@ -102,10 +98,7 @@ namespace ariel
                     return;
                 }
             }
-            // if (_cowboysArray[i]->isAlive())
-            // {
-            //     _cowboysArray[i]->attackTarget(victim);
-            // }
+
             if (cowboysArray.at(i)->isAlive())
             {
                 cowboysArray.at(i)->attackTarget(victim);
@@ -126,10 +119,7 @@ namespace ariel
                     return;
                 }
             }
-            // if (_ninjasArray[i]->isAlive())
-            // {
-            //     _ninjasArray[i]->attackTarget(victim);
-            // }
+            
             if (ninjasArray.at(i)->isAlive())
             {
                 ninjasArray.at(i)->attackTarget(victim);
@@ -142,10 +132,7 @@ namespace ariel
         int count = 0;
         for (unsigned long i = 0; i < _currTeamSize; ++i)
         {
-            // if (_teamArray[i]->isAlive())
-            // {
-            //     ++count;
-            // }
+            
             if (teamArray.at(i)->isAlive())
             {
                 count++;
@@ -156,20 +143,12 @@ namespace ariel
     void Team::print() const
     {
         // first, all the cowboys print:
-        // for (int i = 0; i < _currCowboysSize; ++i)
-        // {
-        //     _cowboysArray[i]->print();
-        // }
         for (unsigned long i = 0; i < _currCowboysSize; ++i)
         {
             cowboysArray.at(i)->print();
         }
 
         // after that, all the ninjas print:
-        // for (int i = 0; i < _currNinjasSize; ++i)
-        // {
-        //     _ninjasArray[i]->print();
-        // }
         for (unsigned long i = 0; i < _currNinjasSize; ++i)
         {
             ninjasArray.at(i)->print();
@@ -184,7 +163,6 @@ namespace ariel
         if (index >= 0 && index < _currTeamSize)
         {
             return teamArray.at(index);
-            // return _teamArray[index];
         }
         return nullptr;
     }

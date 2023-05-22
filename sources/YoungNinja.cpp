@@ -7,12 +7,8 @@ namespace ariel
     YoungNinja::YoungNinja(std::string name, Point characterLoction)
         : Ninja(name, characterLoction)
     {
-        setHP(100);
-        setSpeed(14);
+        setHP(YOUNG_NINJA_HP);
+        setSpeed(YOUNG_NINJA_SPEED);
     }
-
-    // YoungNinja::~YoungNinja()
-    // {
-    // }
 
 } // namespace ariel

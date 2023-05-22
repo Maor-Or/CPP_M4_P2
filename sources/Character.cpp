@@ -11,10 +11,6 @@ namespace ariel
         : _name(name), _location(characterLoction), _hitPoints(0), _isInTeam(false)
     {
     }
-    // Character::Character(const Character &other)
-    // {
-
-    // }
 
     Character::~Character()
     {
@@ -45,7 +41,6 @@ namespace ariel
 
     Point Character::getLocation() const { return _location; }
 
-
     string Character::print() const
     {
         if (isAlive())
@@ -64,7 +59,6 @@ namespace ariel
     void Character::setIsInTeam() { _isInTeam = true; }
     bool Character::getIsInTeam() const { return _isInTeam; }
     int Character::getHP() const { return _hitPoints; }
-
     void Character::setHP(int newhp)
     {
         _hitPoints = newhp;

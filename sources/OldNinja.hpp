@@ -16,7 +16,6 @@ namespace ariel
     public:
         // Ctors & Dtors:
         OldNinja(std::string name, Point characterLoction);
-        //~OldNinja();
     };
 
 } // namespace ariel

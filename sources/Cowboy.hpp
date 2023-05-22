@@ -17,7 +17,6 @@ namespace ariel
     public:
         // Ctors & Dtors:
         Cowboy(std::string name, Point characterLoction);
-        //~Cowboy() override;
 
         // functions to implement:
         void shoot(Character *enemy);

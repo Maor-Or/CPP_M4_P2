@@ -14,9 +14,6 @@ namespace ariel
     {
     }
 
-    // Ninja::~Ninja()
-    // {
-    // }
 
     // functions to implement:
     void Ninja::move(const Character *enemy)
@@ -67,6 +64,7 @@ namespace ariel
         }
     }
 
+    //getters & setters:
     int Ninja::getSpeed() const
     {
         return _speed;

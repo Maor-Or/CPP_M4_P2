@@ -12,10 +12,6 @@ namespace ariel
     {
     }
 
-    // Team2::~Team2()
-    // {
-    // }
-
     // functions to implement:
     void Team2::attack(Team *enemyTeam)
     {
@@ -67,10 +63,7 @@ namespace ariel
                     return;
                 }
             }
-            // if (_teamArray[i]->isAlive())
-            // {
-            //     _teamArray[i]->attackTarget(victim);
-            // }
+            
             if (getTeamArray().at(i)->isAlive())
             {
                 getTeamArray().at(i)->attackTarget(victim);

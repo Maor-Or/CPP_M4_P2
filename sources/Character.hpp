@@ -6,27 +6,27 @@ namespace ariel
     class Character
     {
     private:
-
         Point _location;
         int _hitPoints;
         std::string _name;
         bool _isInTeam;
 
     public:
-       
-           // Ctors & Dtors:
+        // Ctors & Dtors:
         Character(std::string name, Point characterLoction);
-        //Character(const Character& other);
-         // Delete copy operations
-        Character(const Character&) = delete;
-        Character& operator=(const Character&) = delete;
+        virtual ~Character();
+
+        //for tidy:
+        //  Delete copy operations
+        Character(const Character &) = delete;
+        Character &operator=(const Character &) = delete;
+       
         // Delete move constructor
-        Character(Character&&) = delete;
+        Character(Character &&) = delete;
 
         // Delete move assignment operator
-        Character& operator=(Character&&) = delete;
-        
-       virtual ~Character();
+        Character &operator=(Character &&) = delete;
+
 
         // functions to implement:
         bool isAlive() const;
@@ -37,7 +37,7 @@ namespace ariel
         // my added functions:
         virtual void attackTarget(Character *enemy) = 0;
 
-        //getters & setters:
+        // getters & setters:
         Point getLocation() const;
         void setLocation(Point newLocation);
         int getHP() const;

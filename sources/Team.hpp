@@ -19,11 +19,6 @@ namespace ariel
         std::array<Character *, MAX_TEAM_SIZE> teamArray;
         std::array<Character *, MAX_TEAM_SIZE> ninjasArray;
         std::array<Character *, MAX_TEAM_SIZE> cowboysArray;
-
-        // Character *_teamArray[MAX_TEAM_SIZE];
-        // Character *_cowboysArray[MAX_TEAM_SIZE];
-        // Character *_ninjasArray[MAX_TEAM_SIZE];
-
         Character *_leader;
         unsigned long _currTeamSize, _currCowboysSize, _currNinjasSize;
 
@@ -31,16 +26,14 @@ namespace ariel
         // Ctors & Dtors:
         Team(Character *leader);
         virtual ~Team();
- // Delete copy operations
-        Team(const Team&) = delete;
-        Team& operator=(const Team&) = delete;
-          // Delete move operations
-        Team(Team&&) = delete;
-        Team& operator=(Team&&) = delete;
 
-        // Default destructor
-        //~Team() = default;
-
+        // for tidy:
+        //  Delete copy operations
+        Team(const Team &) = delete;
+        Team &operator=(const Team &) = delete;
+        // Delete move operations
+        Team(Team &&) = delete;
+        Team &operator=(Team &&) = delete;
 
         // functions to implement:
         void add(Character *newTeamMember);
@@ -55,7 +48,7 @@ namespace ariel
         // getters & setters:
         int getCurrTeamSize() const;
         Character *getCharacterAt(unsigned long index);
-        Character* getLeader();
+        Character *getLeader();
         unsigned long getCurrTeamSize();
         unsigned long getCurrCowboysSize();
         unsigned long getCurrNinjasSize();

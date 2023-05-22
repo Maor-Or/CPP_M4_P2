@@ -13,6 +13,7 @@ namespace ariel
         Point(const Point &other);
         ~Point();
 
+        //for tidy:
         // Move Constructor
         Point(Point &&other) noexcept;
 
@@ -25,9 +26,11 @@ namespace ariel
         static Point moveTowards(Point origin, Point destination, double distance);
 
         // my added functions:
+        Point &operator=(const Point &other);
+        
+        //getters & setters:
         double getX() const;
         double getY() const;
-        Point &operator=(const Point &other);
         void setX(double newx);
         void setY(double newy);
     };
