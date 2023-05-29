@@ -62,7 +62,7 @@ namespace ariel
             }
 
             // if the cowboy is dead, can't attack:
-             if (getCowboyArray().at(i)->isAlive() == 0)
+            if (getCowboyArray().at(i)->isAlive() == 0)
             {
                 continue;
             }
@@ -147,7 +147,7 @@ namespace ariel
         bool attackingTeamCowboys = false;
 
         // checking if the attacking team has living cowboys:
-        for (unsigned long i = 0; i < getCurrCowboysSize(); ++i)
+        for (unsigned long i = 0; i < getCurrTeamSize(); ++i)
         {
             if (getTeamArray().at(i)->isAlive())
             {
@@ -185,7 +185,8 @@ namespace ariel
     */
     void SmartTeam::rush(Character *attacker, Team *enemyTeam)
     {
-        attacker->print(); cout << " is rushing" << endl;
+        attacker->print();
+        cout << " is rushing" << endl;
 
         Ninja *threat = scanForNinjaThreat(attacker, enemyTeam);
         if (threat != nullptr)
@@ -194,7 +195,16 @@ namespace ariel
         }
         else
         {
-            attacker->attackTarget(closestCowboy(attacker, enemyTeam));
+            Cowboy *closestcowboy = closestCowboy(attacker, enemyTeam);
+
+            if (closestcowboy != nullptr)
+            {
+                attacker->attackTarget(closestCowboy(attacker, enemyTeam));
+            }
+            else
+            {
+                return;
+            }
         }
     }
 
